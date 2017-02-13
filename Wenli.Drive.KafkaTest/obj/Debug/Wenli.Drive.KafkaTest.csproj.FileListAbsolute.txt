@@ -1,0 +1,9 @@
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.KafkaTest\bin\Debug\Wenli.Drive.KafkaTest.exe.config
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.KafkaTest\bin\Debug\Wenli.Drive.KafkaTest.exe
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.KafkaTest\bin\Debug\Wenli.Drive.KafkaTest.pdb
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.KafkaTest\bin\Debug\Wenli.Drive.Kafka.dll
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.KafkaTest\bin\Debug\kafka-net.dll
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.KafkaTest\bin\Debug\Wenli.Drive.Kafka.pdb
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.KafkaTest\obj\Debug\Wenli.Drive.KafkaTest.csprojResolveAssemblyReference.cache
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.KafkaTest\obj\Debug\Wenli.Drive.KafkaTest.exe
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.KafkaTest\obj\Debug\Wenli.Drive.KafkaTest.pdb

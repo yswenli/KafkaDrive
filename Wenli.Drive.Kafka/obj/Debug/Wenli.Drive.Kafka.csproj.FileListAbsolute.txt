@@ -1,0 +1,6 @@
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.Kafka\obj\Debug\Wenli.Drive.Kafka.csprojResolveAssemblyReference.cache
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.Kafka\bin\Debug\Wenli.Drive.Kafka.dll
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.Kafka\bin\Debug\Wenli.Drive.Kafka.pdb
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.Kafka\bin\Debug\kafka-net.dll
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.Kafka\obj\Debug\Wenli.Drive.Kafka.dll
+E:\百度云\Develop\案例\Kafka\Wenli.Drive.Kafka\Wenli.Drive.Kafka\obj\Debug\Wenli.Drive.Kafka.pdb
