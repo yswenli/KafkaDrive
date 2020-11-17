@@ -1,23 +1,5 @@
-﻿/****************************************************************************
-*项目名称：Wenli.Data.Kafka.Common
-*CLR 版本：4.0.30319.42000
-*机器名称：WALLE-PC
-*命名空间：Wenli.Data.Kafka.Common
-*类 名 称：DateTimeUtil
-*版 本 号：V1.0.0.0
-*创建人： yswenli
-*电子邮箱：yswenli@outlook.com
-*创建时间：2020/7/10 11:23:15
-*描述：
-*=====================================================================
-*修改时间：2020/7/10 11:23:15
-*修 改 人： yswenli
-*版 本 号： V1.0.0.0
-*描    述：
-*****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 using System.Threading;
 
@@ -30,10 +12,6 @@ namespace Wenli.Data.Kafka.Common
     public static class DateTimeUtil
     {
         private static DateTime _dt = DateTime.Now;
-        /// <summary>
-        /// 默认开始时间:1970/1/1
-        /// </summary>
-        private static DateTime _defaultStartTime = new DateTime(1970, 1, 1);
 
         static DateTimeUtil()
         {
@@ -142,7 +120,7 @@ namespace Wenli.Data.Kafka.Common
         /// <returns></returns>
         public static DateTime GetTime(long timeStamp)
         {
-            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(_defaultStartTime);
+            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
             long lTime = long.Parse(timeStamp + "0000000");
             TimeSpan toNow = new TimeSpan(lTime);
             return dtStart.Add(toNow);
@@ -153,9 +131,9 @@ namespace Wenli.Data.Kafka.Common
         /// </summary>
         /// <param name=”time”></param>
         /// <returns></returns>
-        public static int ConvertDateTimeInt(DateTime time)
+        public static int ConvertDateTimeInt(System.DateTime time)
         {
-            DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(_defaultStartTime);
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
             return (int)(time - startTime).TotalSeconds;
         }
 
@@ -169,127 +147,21 @@ namespace Wenli.Data.Kafka.Common
             DateTime time = DateTime.Now;
             if (!string.IsNullOrEmpty(dateTime))
                 time = DateTime.Parse(dateTime);
-            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(_defaultStartTime);
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
             return (int)(time - startTime).TotalSeconds;
         }
 
         /// <summary>
-        /// 将时间转换到unix时间戳,单位毫秒
-        /// </summary>
-        /// <param name="dateTime"></param>
-        /// <returns></returns>
-        public static long ToUnixTime(this DateTime dateTime)
-        {
-            return (long)(dateTime - _defaultStartTime).TotalMilliseconds;
-        }
-
-        /// <summary>
-        /// 将时间转换到unix时间戳,单位毫秒
-        /// 内部会将datatime转换为utc时间
-        /// </summary>
-        /// <param name="dateTime"></param>
-        /// <returns></returns>
-        public static long ToUTCUnixTime(this DateTime dateTime)
-        {
-            return (long)(dateTime.ToUniversalTime() - _defaultStartTime).TotalMilliseconds;
-        }
-
-        /// <summary>
-        /// 将unix时间戳转换为本地,单位毫秒(与ToUnixTime为互转)
-        /// </summary>
-        /// <param name="unixTime"></param>
-        /// <returns></returns>
-        public static DateTime UnixTimeToLocalTime(long unixTime)
-        {
-            return _defaultStartTime.AddMilliseconds((double)unixTime);
-        }
-
-        /// <summary>
-        /// 将时间转换到unix时间戳,单位秒
-        /// </summary>
-        /// <param name="dateTime"></param>
-        /// <returns></returns>
-        public static string ToTimeSpanStr(this DateTime dateTime)
-        {
-            return ((long)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds / 1000)).ToString();
-        }
-        /// <summary>
-        /// 将当前时间字符串转换到unix时间戳,单位秒
-        /// </summary>
-        /// <returns></returns>
-        public static long ConvertCurrentStrToUnixTime()
-        {
-            DateTime result = DateTimeUtil.CurrentDateTime;
-            return result.ToUnixTime();
-        }
-        /// <summary>
-        /// 将时间字符串转换到unix时间戳,单位秒
-        /// </summary>
-        /// <param name="dateTime"></param>
-        /// <returns></returns>
-        public static long ConvertStrToUnixTime(string dateTime)
-        {
-            DateTime result;
-            if (DateTime.TryParse(dateTime, System.Globalization.CultureInfo.CurrentCulture,
-                DateTimeStyles.AssumeLocal, out result))
-            {
-                return result.ToUnixTime();
-            }
-
-            return 0;
-        }
-
-        /// <summary>
-        /// 将时间字符串转换到unix时间戳,单位秒
-        /// </summary>
-        /// <param name="ticks"></param>
-        /// <returns></returns>
-        public static DateTime ConvertLongToTime(long ticks)
-        {
-            DateTime result = _defaultStartTime.AddMilliseconds(ticks);
-            return result;
-        }
-
-        /// <summary>
-        /// 字符串时间类型转换为时间类型, 转换失败则返回当前时间
+        /// 字符串时间类型转换为时间类型
         /// </summary>
         /// <param name="dateTime"></param>
         /// <returns></returns>
         public static DateTime ConvertStrToTime(string dateTime)
         {
             if (!string.IsNullOrEmpty(dateTime))
-                return DateTime.Parse(dateTime, System.Globalization.CultureInfo.CurrentCulture,
-                    DateTimeStyles.AssumeLocal);
+                return DateTime.Parse(dateTime);
             else
                 return DateTime.Now;
-        }
-        /// <summary>
-        /// 字符串时间类型转换为时间类型
-        /// </summary>
-        /// <param name="dateTime"></param>
-        /// <param name="defaultTime"></param>
-        /// <returns></returns>
-        public static DateTime ConvertStrToTime(string dateTime, DateTime defaultTime)
-        {
-            if (!string.IsNullOrEmpty(dateTime))
-                return DateTime.Parse(dateTime, System.Globalization.CultureInfo.CurrentCulture,
-                    DateTimeStyles.AssumeLocal);
-            else
-                return defaultTime;
-        }
-
-        /// <summary>
-        /// 字符串时间类型转换为可空的时间类型
-        /// </summary>
-        /// <param name="dateTime"></param>
-        /// <returns></returns>
-        public static DateTime? ConvertStrToNullTime(string dateTime)
-        {
-            if (!string.IsNullOrEmpty(dateTime))
-                return DateTime.Parse(dateTime, System.Globalization.CultureInfo.CurrentCulture,
-                    DateTimeStyles.AssumeLocal);
-            else
-                return null;
         }
 
         /// <summary>
@@ -303,37 +175,14 @@ namespace Wenli.Data.Kafka.Common
         }
 
         /// <summary>
-        /// 返回日期时间字符串
-        /// </summary>
-        /// <param name="dateTime"></param>
-        /// <param name="format"></param>
-        /// <returns></returns>
-        public static string ToDateTimeString(this DateTime dateTime, string format = "yyyy-MM-dd HH:mm:ss")
-        {
-            return dateTime.ToString(format);
-        }
-
-        /// <summary>
-        /// 返回日期时间字符串
-        /// </summary>
-        /// <param name="format"></param>
-        /// <returns></returns>
-        public static string ToDateTimeString(string format = "yyyy-MM-dd HH:mm:ss")
-        {
-            return CurrentDateTime.ToString(format);
-        }
-
-        /// <summary>
-        /// 返回日期时间字符串，格式：yyyy-MM-dd HH:mm:ss
+        /// 返回日期时间字符串，格式：yyyy-MM-dd HH:mm:ss.fff
         /// </summary>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        public static string ToDateTimeShortStr(this DateTime dateTime)
+        public static string ToDateTimeString(this DateTime dateTime)
         {
-            return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            return dateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
         }
-
-
 
         /// <summary>
         /// 返回日期时间字符串，格式：yyyy-MM-dd HH:mm:ss.fff
@@ -343,11 +192,7 @@ namespace Wenli.Data.Kafka.Common
         /// <returns></returns>
         public static string ToDateTimeString(this DateTime? dateTime)
         {
-            if (!dateTime.HasValue || dateTime == default(DateTime))
-            {
-                return string.Empty;
-            }
-            return dateTime.Value.ToDateTimeString();
+            return dateTime.HasValue ? dateTime.Value.ToDateTimeString() : string.Empty;
         }
 
         /// <summary>
@@ -438,19 +283,37 @@ namespace Wenli.Data.Kafka.Common
         }
 
         /// <summary>
-        /// 获取指定日期是一年中的第几周: 每周第一天是周一
+        /// 将当前时间字符串转换到unix时间戳,单位秒
         /// </summary>
-        /// <param name="dateTime">时间</param>
-        /// <param name="cultureInfo">区域信息，默认是中国地区</param>
         /// <returns></returns>
-        public static int GetWeekOfYear(DateTime dateTime, CultureInfo cultureInfo = null)
+        public static long ConvertCurrentStrToUnixTime()
         {
-            if (cultureInfo == null)
-            {
-                cultureInfo = CultureInfo.GetCultureInfo("zh-CN");
-            }
-            //强制设置周一是每周的第一天
-            return cultureInfo.Calendar.GetWeekOfYear(dateTime, cultureInfo.DateTimeFormat.CalendarWeekRule, DayOfWeek.Monday);
+            DateTime result = DateTimeUtil.CurrentDateTime;
+            return result.ToUnixTime();
+        }
+
+        /// <summary>
+        /// 默认开始时间:1970/1/1
+        /// </summary>
+        private static DateTime _defaultStartTime = new DateTime(1970, 1, 1);
+
+        /// <summary>
+        /// 将时间转换到unix时间戳,单位毫秒
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public static long ToUnixTime(this DateTime dateTime)
+        {
+            return (long)(dateTime - _defaultStartTime).TotalMilliseconds;
+        }
+        /// <summary>
+        /// 将unix时间戳转换为本地,单位毫秒(与ToUnixTime为互转)
+        /// </summary>
+        /// <param name="unixTime"></param>
+        /// <returns></returns>
+        public static DateTime UnixTimeToLocalTime(long unixTime)
+        {
+            return _defaultStartTime.AddMilliseconds((double)unixTime);
         }
     }
 }
